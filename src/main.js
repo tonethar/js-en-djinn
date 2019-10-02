@@ -1,4 +1,4 @@
-import {Rectangle} from './../lib/display.js';
+import {Rectangle,stage} from './../lib/display.js';
 export {init};
 
 let canvas,ctx;
@@ -13,11 +13,40 @@ function init(canvasRef){
 	ctx.fillStyle = "#ff33cc";
 	ctx.fillRect(0,0,canvasWidth,canvasHeight);
 	
+	let bg = new Rectangle();
+	bg.x = 0;
+	bg.y = 0;
+	bg.width = canvasWidth;
+	bg.height = canvasHeight;
+	bg.fillStyle = "taupe";
+	stage.addChild(bg);
+	
 	let r = new Rectangle();
-	r.x = 100;
-	r.y = 100;
+	r.x = 0;
+	r.y = 0;
+	r.width = 100;
+	r.height = 100;
 	r.fillStyle = "red";
-	r.render(ctx);
-	console.log(r);
-	console.log("init called");
+	r.rotation = -Math.PI/8;
+
+	
+	let r2 = new Rectangle();
+	r2.x = 100;
+	r2.y = 0;
+	r2.width = 100;
+	r2.height = 100;
+	r2.fillStyle = "purple";
+	r2.rotation = -Math.PI/8;
+	r2.pivotX=0;
+	r2.pivotY=0;
+	
+	stage.addChild(r);
+		stage.addChild(r2);
+	
+	stage.render(ctx);
+	
+	
+	// r.render(ctx);
+// 	console.log(r);
+// 	console.log("init called");
 }
