@@ -1,4 +1,4 @@
-import {Rectangle,stage} from './../lib/display.js';
+import {Rectangle,stage,Text} from './../lib/display.js';
 export {init};
 
 let canvas,ctx;
@@ -18,35 +18,36 @@ function init(canvasRef){
 	bg.y = 0;
 	bg.width = canvasWidth;
 	bg.height = canvasHeight;
-	bg.fillStyle = "taupe";
+	bg.fillStyle = "yellow";
 	stage.addChild(bg);
 	
-	let r = new Rectangle();
-	r.x = 0;
-	r.y = 0;
-	r.width = 100;
-	r.height = 100;
-	r.fillStyle = "red";
-	r.rotation = -Math.PI/8;
+	let r = new Rectangle(0,0,100,100,"red");
+	r.rotation = Math.PI/8;
 
 	
-	let r2 = new Rectangle();
-	r2.x = 100;
-	r2.y = 0;
-	r2.width = 100;
-	r2.height = 100;
-	r2.fillStyle = "purple";
-	r2.rotation = -Math.PI/8;
-	r2.pivotX=0;
-	r2.pivotY=0;
+	let r2 = new Rectangle(100,0,100,100,"purple");
+	r2.rotation = Math.PI/12;
+	r2.pivotX=1;
+	r2.pivotY=1;
 	
 	stage.addChild(r);
-		stage.addChild(r2);
+	stage.addChild(r2);
 	
-	stage.render(ctx);
+	let eye1 = new Rectangle(0,0,10,10,"green");
+	r.addChild(eye1);
+	
+	let title = new Text(200,0,"Title Goes Here");
+	bg.addChild(title)
 	
 	
-	// r.render(ctx);
-// 	console.log(r);
-// 	console.log("init called");
+	
+	loop();
+	
+	function loop(){
+		requestAnimationFrame(loop);
+		r.rotation += .05;
+		r2.rotation += .05;
+		stage.render(ctx);
+	}
+	
 }
